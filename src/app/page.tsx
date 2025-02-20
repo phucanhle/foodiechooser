@@ -1,6 +1,3 @@
-import Header from "@/components/Header";
-import Link from "next/link";
-
 export default function Home() {
     return (
         <div className="min-h-screen w-screen flex flex-col items-center justify-center bg-gradient-to-b from-[#F0BD48] via-20% via-white">
@@ -29,10 +26,6 @@ export default function Home() {
                     </button>
                 </div>
             </main>
-
-            {/* <footer className="w-full py-4 text-center bg-orange-800 text-white">
-                © {new Date().getFullYear()} - Bản quyền thuộc về PA.
-            </footer> */}
         </div>
     );
 }

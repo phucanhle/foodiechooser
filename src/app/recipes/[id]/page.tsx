@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { useState, useEffect } from "react";
 // import { FaStar } from "react-icons/fa"; // Import icon sao đánh giá
 
@@ -49,7 +50,7 @@ export default function Fomula() {
                 {/* Hình ảnh */}
                 <div className="w-full max-w-[450px] min-h-[300px] border rounded-2xl p-4 relative">
                     {!isLoaded && <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-2xl"></div>}
-                    <img
+                    <Image
                         src={fakedatafood.imageSrc}
                         alt={fakedatafood.imageDes}
                         className={`w-full h-full object-cover rounded-2xl transition-opacity duration-500 ${

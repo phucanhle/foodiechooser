@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 export default function ItemCard({ recipeID, ImageSource, ImageDescription, ItemName, ItemDescription }: any) {
     return (
@@ -8,7 +9,7 @@ export default function ItemCard({ recipeID, ImageSource, ImageDescription, Item
         shadow-xl
          group "
         >
-            <img src={ImageSource} alt={ImageDescription} className="h-full w-full object-cover rounded-lg brightness-90" />
+            <Image src={ImageSource} alt={ImageDescription} className="h-full w-full object-cover rounded-lg brightness-90" />
             <div
                 className="absolute top-[50%] w-full h-[50%] z-0 rounded-lg 
                 group-hover:h-full group-hover:top-0 

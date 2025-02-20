@@ -2,7 +2,6 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import gsap from "gsap";
-import SearchBar from "./SearchBar";
 
 export default function Header() {
     const headerRef = useRef();

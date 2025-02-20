@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 interface NutritionFacts {
@@ -55,7 +56,7 @@ export default function IngredientCard({
         <div className="relative w-full rounded-2xl shadow">
             {!showImage && <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-lg h-[300px]"></div>}
 
-            <img
+            <Image
                 src={imageSrc}
                 alt={imageDes}
                 className={`w-full h-[300px] object-cover rounded-2xl transition-opacity duration-500 ${
