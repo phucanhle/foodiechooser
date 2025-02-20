@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 import SideBar from "@/components/SideBar";
+import Header from "@/components/Header";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 export const metadata: Metadata = {
     title: "Food Next App",
@@ -15,9 +18,13 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className="flex bg-slate-100">
-                <SideBar />
-                <main>{children}</main>
+            <body
+                className="flex bg-slate-100 justify-center
+                 bg-gradient-to-b from-[#F0BD48] via-20% via-white 
+                 min-h-fit"
+            >
+                <Header />
+                <Suspense fallback={<Loading />}>{children}</Suspense>
             </body>
         </html>
     );

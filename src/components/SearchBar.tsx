@@ -3,8 +3,8 @@ export default function SearchBar() {
         <div className="relative w-full max-w-[25rem]">
             <input
                 type="text"
-                className="py-2 pl-10 pr-4 border rounded-full outline-none 
-                border-gray-300 focus:border-orange-500 focus:ring-2 focus:ring-orange-300 
+                className="py-2 pl-10 pr-4 border rounded-2xl outline-none 
+                border-gray-300 focus:border-[#E9C46A] focus:ring-2 focus:ring-[#E9C46A]
                 w-full transition-all duration-300 shadow-sm hover:shadow-md"
                 placeholder="Search for food..."
             />
