@@ -4,7 +4,8 @@ import Link from "next/link";
 import gsap from "gsap";
 
 export default function Header() {
-    const headerRef = useRef();
+    const headerRef = useRef<HTMLDivElement>(null);
+
     const [isClicking, setIsClicking] = useState(true);
     const [isMenuOpen, setIsMenuOpen] = useState(false); // State to toggle menu visibility
 
