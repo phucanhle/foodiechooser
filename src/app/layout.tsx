@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-import SideBar from "@/components/SideBar";
 import Header from "@/components/Header";
 import { Suspense } from "react";
 import Loading from "./loading";

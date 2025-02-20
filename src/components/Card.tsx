@@ -9,7 +9,13 @@ export default function ItemCard({ recipeID, ImageSource, ImageDescription, Item
         shadow-xl
          group "
         >
-            <Image src={ImageSource} alt={ImageDescription} className="h-full w-full object-cover rounded-lg brightness-90" />
+            <Image
+                src={ImageSource}
+                width={500}
+                height={500}
+                alt={ImageDescription}
+                className="h-full w-full object-cover rounded-lg brightness-90"
+            />
             <div
                 className="absolute top-[50%] w-full h-[50%] z-0 rounded-lg 
                 group-hover:h-full group-hover:top-0 

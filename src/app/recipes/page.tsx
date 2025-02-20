@@ -1,5 +1,4 @@
 import ItemCard from "@/components/Card";
-import SearchBar from "@/components/SearchBar";
 import Title from "@/components/Title";
 export default function Recipes() {
     const fakedatafood = [

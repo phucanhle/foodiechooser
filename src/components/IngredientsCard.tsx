@@ -58,6 +58,8 @@ export default function IngredientCard({
 
             <Image
                 src={imageSrc}
+                width={500}
+                height={500}
                 alt={imageDes}
                 className={`w-full h-[300px] object-cover rounded-2xl transition-opacity duration-500 ${
                     showImage ? "opacity-100" : "opacity-0"

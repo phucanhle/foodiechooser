@@ -3,7 +3,7 @@ export default function Home() {
         <div className="min-h-screen w-screen flex flex-col items-center justify-center bg-gradient-to-b from-[#F0BD48] via-20% via-white">
             <main className="relative flex flex-col items-center justify-center flex-1 px-6 w-full">
                 <div className="text-center">
-                    <h1 className="text-6xl">Let's find your</h1>
+                    <h1 className="text-6xl">Let&apos;s find your</h1>
                     <h1 className="text-8xl text-[#F0BD48] font-bold mt-5">FOOD</h1>
                 </div>
                 <div className="flex gap-5 w-full my-20 flex-wrap justify-center">
