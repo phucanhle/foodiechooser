@@ -1,6 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
-export default function ItemCard({ recipeID, ImageSource, ImageDescription, ItemName, ItemDescription }: any) {
+
+interface RecipesItems {
+    recipeID: string;
+    ImageSource: string;
+    ImageDescription: string;
+    ItemName: string;
+    ItemDescription: string;
+}
+
+export default function ItemCard({ recipeID, ImageSource, ImageDescription, ItemName, ItemDescription }: RecipesItems) {
     return (
         <div
             className="relative w-full max-w-[85%] h-[475px] md:max-w-[260px] md:max-h-[375px]

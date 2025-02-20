@@ -20,7 +20,7 @@ export default function Home() {
                     </button>
                 </div>
                 <div className="flex flex-col items-center">
-                    <p className=" text-[#454139] mb-2">Can't you pick a food?</p>
+                    <p className=" text-[#454139] mb-2">Can&apos;t you pick a food?</p>
                     <button className="w-full max-w-96 bg-[#F0BD48] text-[#454139] text-xl px-12 py-4 rounded-2xl font-bold">
                         Let us choose for you!
                     </button>

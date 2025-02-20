@@ -28,8 +28,8 @@ export default function IngredientCard({
     group,
 }: ItemCardProps) {
     const [isLoaded, setIsLoaded] = useState(false);
-    const [color, setColor] = useState("");
     const colorOfGroup = ["#BA8609", "#D62828", "#6D6875", "#90BE6D"];
+    const [color, setColor] = useState("");
     const [showImage, setShowImage] = useState(false);
 
     useEffect(() => {
