@@ -12,18 +12,23 @@ export default function SearchPage() {
     const listDished = [
         {
             recipeID: "7",
-            imageSrc: "https://carlsbadcravings.com/wp-content/uploads/2023/06/chicken-street-tacos-7a.jpg",
-            imageDes: "Mexican-style tacos with fresh toppings",
+            imageSrc:
+                "https://carlsbadcravings.com/wp-content/uploads/2023/06/chicken-street-tacos-7a.jpg",
+            imageDes:
+                "Mexican-style tacos with fresh toppings",
             foodName: "Street Tacos",
-            foodDes: "Soft corn tortillas filled with seasoned meat, fresh cilantro, and onions.",
+            foodDes:
+                "Soft corn tortillas filled with seasoned meat, fresh cilantro, and onions.",
         },
     ];
     const listIngre = [
         {
-            imageSrc: "https://southmill.com/wp-content/uploads/2021/12/beech-isolated-white@2x.png",
+            imageSrc:
+                "https://southmill.com/wp-content/uploads/2021/12/beech-isolated-white@2x.png",
             imageDes: "A mix of fresh mushrooms",
             ingredientName: "Beech Mushrooms",
-            ingredientDes: "Earthy and umami-rich, perfect for stir-fries, soups, and pasta.",
+            ingredientDes:
+                "Earthy and umami-rich, perfect for stir-fries, soups, and pasta.",
             nutritionFacts: {
                 calories: 22,
                 protein: "3g",
@@ -40,9 +45,11 @@ export default function SearchPage() {
         <div className="w-[90%] max-w-[1080px] min-h-screen py-32">
             <h1>Search Results for: "{query}"</h1>
             <SearchBar />
-            <h1 className="py-2 text-lg font-bold text-[#454139]">Recipes</h1>
+            <h1 className="py-2 text-lg font-bold text-[#454139]">
+                Recipes
+            </h1>
 
-            <div className="flex justify-around">
+            <div className="flex justify-around md:justify-start">
                 {listDished.map((item, index) => (
                     <ItemCard
                         key={index}
@@ -54,7 +61,9 @@ export default function SearchPage() {
                     />
                 ))}
             </div>
-            <h1 className="py-2 text-lg font-bold text-[#454139]">Ingredient</h1>
+            <h1 className="py-2 text-lg font-bold text-[#454139]">
+                Ingredient
+            </h1>
             {listIngre.map(
                 (item, index) => (
                     <IngredientCard
@@ -67,7 +76,7 @@ export default function SearchPage() {
                         group={item.group}
                     />
                 ),
-                [],
+                []
             )}
         </div>
     );
