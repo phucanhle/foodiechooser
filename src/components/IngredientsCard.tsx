@@ -18,6 +18,12 @@ interface ItemCardProps {
     group: string;
     nutritionFacts: NutritionFacts;
 }
+const colorOfGroup = [
+    "#BA8609",
+    "#D62828",
+    "#6D6875",
+    "#90BE6D",
+];
 
 export default function IngredientCard({
     imageSrc,
@@ -28,7 +34,6 @@ export default function IngredientCard({
     group,
 }: ItemCardProps) {
     const [isLoaded, setIsLoaded] = useState(false);
-    const colorOfGroup = ["#BA8609", "#D62828", "#6D6875", "#90BE6D"];
     const [color, setColor] = useState("");
     const [showImage, setShowImage] = useState(false);
 
@@ -47,14 +52,19 @@ export default function IngredientCard({
         };
         setColor(checkColorOfGroup(group));
         if (isLoaded) {
-            const timeout = setTimeout(() => setShowImage(true), 500); // Giữ skeleton 1s
+            const timeout = setTimeout(
+                () => setShowImage(true),
+                500
+            ); // Giữ skeleton 1s
             return () => clearTimeout(timeout);
         }
     }, [isLoaded, group]); // Thêm 'group' vào dependency
 
     return (
         <div className="relative w-full rounded-2xl shadow">
-            {!showImage && <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-lg h-[300px]"></div>}
+            {!showImage && (
+                <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-lg h-[300px]"></div>
+            )}
 
             <Image
                 src={imageSrc}
@@ -70,29 +80,43 @@ export default function IngredientCard({
             <div
                 className={`absolute top-0 p-4 h-full w-full  rounded-2xl bg-gradient-to-r from-[${color}]    via-black/35 via-100%`}
             >
-                <h3 className="text-3xl text-white font-bold">{ingredientName}</h3>
-                <p className="text-sm text-white">{ingredientDes}</p>
+                <h3 className="text-3xl text-white font-bold">
+                    {ingredientName}
+                </h3>
+                <p className="text-sm text-white">
+                    {ingredientDes}
+                </p>
                 <div className="flex items-end text-white text-nowrap mt-4">
                     <div>
                         <p>
-                            <strong>Calories:</strong> {nutritionFacts.calories} kcal
+                            <strong>Calories:</strong>{" "}
+                            {nutritionFacts.calories} kcal
                         </p>
                         <p>
-                            <strong>Protein:</strong> {nutritionFacts.protein}
+                            <strong>Protein:</strong>{" "}
+                            {nutritionFacts.protein}
                         </p>
                         <p>
-                            <strong>Fat:</strong> {nutritionFacts.fat}
+                            <strong>Fat:</strong>{" "}
+                            {nutritionFacts.fat}
                         </p>
                         <p>
-                            <strong>Carbs:</strong> {nutritionFacts.carbohydrates}
+                            <strong>Carbs:</strong>{" "}
+                            {nutritionFacts.carbohydrates}
                         </p>
                     </div>
                     <div>
                         <p>
-                            <strong>Vitamins:</strong> {nutritionFacts.vitamins.join(", ")}
+                            <strong>Vitamins:</strong>{" "}
+                            {nutritionFacts.vitamins.join(
+                                ", "
+                            )}
                         </p>
                         <p>
-                            <strong>Minerals:</strong> {nutritionFacts.minerals.join(", ")}
+                            <strong>Minerals:</strong>{" "}
+                            {nutritionFacts.minerals.join(
+                                ", "
+                            )}
                         </p>
                     </div>
                 </div>

@@ -5,7 +5,9 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 export default function Home() {
     const [searchInput, setSearchInput] = useState("");
-    const handleTyping = (e: any) => {
+    const handleTyping = (
+        e: React.KeyboardEvent<HTMLInputElement>
+    ) => {
         if (e.key === "Enter") {
             console.log("User pressed Enter!");
             // Thực hiện hành động khi nhấn Enter, ví dụ: gửi dữ liệu, tìm kiếm...

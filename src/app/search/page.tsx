@@ -2,7 +2,6 @@
 import ItemCard from "@/components/Card";
 import IngredientCard from "@/components/IngredientsCard";
 import SearchBar from "@/components/SearchBar";
-import { li } from "framer-motion/client";
 import { useSearchParams } from "next/navigation";
 
 export default function SearchPage() {
@@ -43,7 +42,7 @@ export default function SearchPage() {
 
     return (
         <div className="w-[90%] max-w-[1080px] min-h-screen py-32">
-            <h1>Search Results for: "{query}"</h1>
+            <h1>Search Results for: &quot;{query}&quot;</h1>
             <SearchBar />
             <h1 className="py-2 text-lg font-bold text-[#454139]">
                 Recipes
