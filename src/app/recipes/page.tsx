@@ -52,11 +52,11 @@ export default function Recipes() {
         <div
             className="flex flex-col items-center justify-center
             min-h-screen w-full h-full
-            py-40"
+            py-32"
         >
             <Title content="Recipes" />
             <div
-                className="flex flex-wrap gap-20 justify-around
+                className="flex flex-wrap gap-4 justify-around
                 w-full max-w-[1080px] 
                 mt-10"
             >

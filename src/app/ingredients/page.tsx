@@ -152,7 +152,7 @@ export default function Ingredients() {
                         Strong bites
                     </button>
                 </div>
-                {/* className={`bg-gradient-to-b from- via-white`} */}
+
                 <div className={`w-[90%] max-w-[550px] `}>
                     <h1
                         className={`text-xl font-bold p-4 rounded-2xl text-white drop-shadow-lg 

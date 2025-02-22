@@ -53,6 +53,8 @@ export default function Fomula() {
                     <Image
                         src={fakedatafood.imageSrc}
                         alt={fakedatafood.imageDes}
+                        width={500}
+                        height={500}
                         className={`w-full h-full object-cover rounded-2xl transition-opacity duration-500 ${
                             isLoaded ? "opacity-100" : "opacity-0"
                         }`}

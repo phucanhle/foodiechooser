@@ -12,7 +12,7 @@ interface RecipesItems {
 export default function ItemCard({ recipeID, ImageSource, ImageDescription, ItemName, ItemDescription }: RecipesItems) {
     return (
         <div
-            className="relative w-full max-w-[85%] h-[475px] md:max-w-[260px] md:max-h-[375px]
+            className="relative w-full max-w-[325px] h-[475px]  md:max-w-[275px] md:max-h-[375px]
         rounded-lg 
         bg-white 
         shadow-xl
