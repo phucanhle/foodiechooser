@@ -1,12 +1,26 @@
-"use client"; // Đánh dấu đây là Client Component
+"use client";
+import {
+    useRouter,
+    useSearchParams,
+} from "next/navigation";
+import { useState, useEffect } from "react";
 import ItemCard from "@/components/Card";
 import IngredientCard from "@/components/IngredientsCard";
 import SearchBar from "@/components/SearchBar";
-import { useSearchParams } from "next/navigation";
 
 export default function SearchPage() {
+    const router = useRouter();
     const searchParams = useSearchParams();
-    const query = searchParams.get("q") || ""; // Lấy giá trị `q`, nếu không có thì là ""
+    const query = searchParams.get("q") || "";
+
+    const [searchQuery, setSearchQuery] = useState(query);
+
+    // Cập nhật URL khi searchQuery thay đổi
+    useEffect(() => {
+        if (searchQuery) {
+            router.push(`/search?q=${searchQuery}`);
+        }
+    }, [searchQuery]);
 
     const listDished = [
         {
@@ -43,11 +57,10 @@ export default function SearchPage() {
     return (
         <div className="w-[90%] max-w-[1080px] min-h-screen py-32">
             <h1>Search Results for: &quot;{query}&quot;</h1>
-            <SearchBar />
+            <SearchBar onSearch={setSearchQuery} />
             <h1 className="py-2 text-lg font-bold text-[#454139]">
                 Recipes
             </h1>
-
             <div className="flex justify-around md:justify-start">
                 {listDished.map((item, index) => (
                     <ItemCard
@@ -63,8 +76,8 @@ export default function SearchPage() {
             <h1 className="py-2 text-lg font-bold text-[#454139]">
                 Ingredient
             </h1>
-            {listIngre.map(
-                (item, index) => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                {listIngre.map((item, index) => (
                     <IngredientCard
                         key={index}
                         imageSrc={item.imageSrc}
@@ -74,9 +87,8 @@ export default function SearchPage() {
                         nutritionFacts={item.nutritionFacts}
                         group={item.group}
                     />
-                ),
-                []
-            )}
+                ))}
+            </div>
         </div>
     );
 }
