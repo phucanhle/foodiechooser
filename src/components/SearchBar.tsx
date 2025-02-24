@@ -1,4 +1,22 @@
-export default function SearchBar() {
+import { useState } from "react";
+
+interface SearchBarProps {
+    onSearch: (query: string) => void;
+}
+
+export default function SearchBar({
+    onSearch,
+}: SearchBarProps) {
+    const [input, setInput] = useState("");
+
+    const handleInput = (
+        e: React.ChangeEvent<HTMLInputElement>
+    ) => {
+        const value = e.target.value;
+        setInput(value);
+        onSearch(value);
+    };
+
     return (
         <div className="relative w-full max-w-[25rem]">
             <input
@@ -8,6 +26,8 @@ export default function SearchBar() {
                 border-gray-300 focus:border-[#E9C46A] focus:ring-2 focus:ring-[#E9C46A]
                 w-full transition-all duration-300 shadow-sm hover:shadow-md"
                 placeholder="Search for food..."
+                onChange={handleInput}
+                value={input}
             />
             <svg
                 className="w-6 h-6 text-gray-800 dark:text-gray-400 absolute left-3 top-1/2 -translate-y-1/2 "

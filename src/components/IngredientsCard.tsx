@@ -1,14 +1,6 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
-
-interface NutritionFacts {
-    calories: number;
-    protein: string;
-    fat: string;
-    carbohydrates: string;
-    vitamins: string[];
-    minerals: string[];
-}
+import { NutritionFacts } from "@/types/ingredients";
 
 interface ItemCardProps {
     imageSrc: string;
@@ -42,9 +34,9 @@ export default function IngredientCard({
             switch (group.toLowerCase()) {
                 case "protein":
                     return colorOfGroup[1];
-                case "tastes":
+                case "taste":
                     return colorOfGroup[2];
-                case "vegetables":
+                case "vegetable":
                     return colorOfGroup[3];
                 default:
                     return colorOfGroup[0];
