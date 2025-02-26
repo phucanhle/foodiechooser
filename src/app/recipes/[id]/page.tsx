@@ -1,62 +1,95 @@
 "use client";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-// import { FaStar } from "react-icons/fa"; // Import icon sao đánh giá
+import { getRecipeDetail } from "@/lib/api";
+import { useParams } from "next/navigation";
+
+type Recipe = {
+    id: string;
+    image_src: string;
+    image_des: string;
+    food_name: string;
+    food_des: string;
+};
+type NutritionFact = {
+    fat: string;
+    food_id: string;
+    protein: string;
+    calories: number;
+    carbohydrates: string;
+};
+
+type Ingredient = {
+    foods: {
+        ingredient_name: string;
+        nutrition_facts: NutritionFact[];
+    };
+    quantity: string;
+};
+
+type Formula = {
+    description: string;
+};
 
 export default function Fomula() {
-    const fakedatafood = {
-        recipeID: "8",
-        imageSrc: "https://garlicsaltandlime.com/wp-content/uploads/2022/07/Garden-salad-thumbnail.jpg",
-        imageDes: "A fresh garden salad with various vegetables",
-        foodName: "Garden Salad",
-        foodDes: "A mix of fresh lettuce, cucumbers, tomatoes, and carrots with a light vinaigrette.",
-        prepTime: "15 phút", // Thời gian chuẩn bị
-        calories: 120, // Lượng calo
-        servings: 2, // Số phần ăn
-        rating: 4.5, // Đánh giá trung bình (trên 5)
-        ingredients: [
-            "200g xà lách",
-            "1 quả dưa leo",
-            "1 quả cà chua",
-            "1 củ cà rốt",
-            "2 thìa dầu oliu",
-            "1 thìa giấm balsamic",
-            "Muối, tiêu vừa đủ",
-        ],
-        instructions: [
-            "Rửa sạch rau củ, để ráo nước.",
-            "Cắt dưa leo, cà chua, cà rốt thành lát mỏng.",
-            "Trộn các nguyên liệu vào tô lớn.",
-            "Thêm dầu oliu, giấm balsamic, muối và tiêu.",
-            "Trộn đều và thưởng thức ngay.",
-        ],
-    };
-
+    const { id } = useParams();
     const [isLoaded, setIsLoaded] = useState(false);
+    const [recipe, setRecipe] = useState<Recipe | null>(
+        null
+    );
+    const [ingredients, setIngredients] = useState<
+        Ingredient[]
+    >([]);
+    const [fomula, setFomula] = useState<Formula[]>([]);
 
     useEffect(() => {
-        // Giả lập delay load ảnh để hiệu ứng đẹp hơn
-        const timer = setTimeout(() => {
-            setIsLoaded(true);
-        }, 1000);
+        if (!id) return;
 
-        return () => clearTimeout(timer);
-    }, []);
+        (async () => {
+            try {
+                const data = await getRecipeDetail(
+                    id as string
+                );
+                setRecipe(data);
+                setIngredients(
+                    data.recipe_ingredients || []
+                );
+                setFomula(data.recipe_steps || []);
+            } catch (error) {
+                console.error(
+                    "Lỗi khi lấy công thức:",
+                    error
+                );
+            }
+        })();
+    }, [id]);
 
     return (
-        <div className="relative w-screen max-w-[1080px] min-h-screen flex flex-col gap-6 py-40 px-4 mx-auto">
+        <div className="relative w-screen max-w-[1080px] min-h-screen flex flex-col gap-6 py-28 px-4 mx-auto">
             {/* Layout chính */}
             <div className="flex gap-6 flex-wrap md:flex-nowrap">
                 {/* Hình ảnh */}
                 <div className="w-full max-w-[450px] min-h-[300px] border rounded-2xl p-4 relative">
-                    {!isLoaded && <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-2xl"></div>}
+                    {!isLoaded && (
+                        <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-2xl"></div>
+                    )}
                     <Image
-                        src={fakedatafood.imageSrc}
-                        alt={fakedatafood.imageDes}
+                        src={
+                            recipe?.image_src &&
+                            recipe.image_src !== ""
+                                ? recipe.image_src
+                                : "https://media-cdn-v2.laodong.vn/storage/newsportal/2024/9/27/1400438/Pho-4.jpg"
+                        }
+                        alt={
+                            recipe?.image_des ||
+                            "Hình ảnh món ăn"
+                        }
                         width={500}
                         height={500}
                         className={`w-full h-full object-cover rounded-2xl transition-opacity duration-500 ${
-                            isLoaded ? "opacity-100" : "opacity-0"
+                            isLoaded
+                                ? "opacity-100"
+                                : "opacity-0"
                         }`}
                         onLoad={() => setIsLoaded(true)}
                         onError={() => setIsLoaded(true)}
@@ -65,41 +98,84 @@ export default function Fomula() {
 
                 {/* Thông tin món ăn */}
                 <div className="w-full min-h-[300px] border rounded-2xl p-4">
-                    <h1 className="text-2xl font-bold text-gray-800">{fakedatafood.foodName}</h1>
-                    <p className="text-gray-600 mt-2">{fakedatafood.foodDes}</p>
+                    <h1 className="text-2xl font-bold text-gray-800">
+                        {recipe?.food_name || "Tên món ăn"}
+                    </h1>
+                    <p className="text-gray-600 mt-2">
+                        {recipe?.food_des || "Mô tả món ăn"}
+                    </p>
 
-                    {/* Thông tin dinh dưỡng và thời gian chế biến */}
+                    {/* Thông tin dinh dưỡng và thời gian chế biến
                     <div className="mt-4 flex flex-wrap gap-4 text-gray-700">
                         <p>
-                            ⏳ <strong>Thời gian chuẩn bị:</strong> {fakedatafood.prepTime}
+                            ⏳{" "}
+                            <strong>
+                                Thời gian chuẩn bị:
+                            </strong>{" "}
+                            {recipe?.prepTime || "Không rõ"}
                         </p>
                         <p>
-                            🔥 <strong>Lượng calo:</strong> {fakedatafood.calories} kcal
+                            🔥 <strong>Lượng calo:</strong>{" "}
+                            {recipe?.calories || "Không có"}{" "}
+                            kcal
                         </p>
                         <p>
-                            🍽️ <strong>Khẩu phần:</strong> {fakedatafood.servings} người
+                            🍽️ <strong>Khẩu phần:</strong>{" "}
+                            {recipe?.servings || "Không rõ"}{" "}
+                            người
                         </p>
-                    </div>
+                    </div> */}
                 </div>
             </div>
 
             {/* Thành phần nguyên liệu */}
             <div className="w-full min-h-[200px] border rounded-2xl p-4">
-                <h2 className="text-xl font-semibold text-gray-800">Thành phần</h2>
+                <h2 className="text-xl font-semibold text-gray-800">
+                    INGREDIENTS
+                </h2>
                 <ul className="list-disc list-inside text-gray-700 mt-2">
-                    {fakedatafood.ingredients.map((item, index) => (
-                        <li key={index}>{item}</li>
-                    ))}
+                    {ingredients.length > 0 ? (
+                        ingredients.map((item, index) => (
+                            <li
+                                key={index}
+                                className="flex items-end w-full max-w-[380px]"
+                            >
+                                <span className="capitalize">
+                                    {item?.foods
+                                        ?.ingredient_name ||
+                                        "Không rõ"}
+                                </span>
+                                <span className="flex-1 border-b border-dashed border-gray-200 mx-2"></span>
+                                <span>
+                                    {item?.quantity || "0"}
+                                </span>
+                            </li>
+                        ))
+                    ) : (
+                        <p>Không có nguyên liệu.</p>
+                    )}
                 </ul>
             </div>
 
             {/* Hướng dẫn chế biến */}
             <div className="w-full min-h-[200px] border rounded-2xl p-4">
-                <h2 className="text-xl font-semibold text-gray-800">👨‍🍳 Hướng dẫn chế biến</h2>
+                <h2 className="text-xl font-semibold text-gray-800">
+                    👨‍🍳 GUIDE
+                </h2>
                 <ol className="list-decimal list-inside text-gray-700 mt-2">
-                    {fakedatafood.instructions.map((step, index) => (
-                        <li key={index}>{step}</li>
-                    ))}
+                    {fomula.length > 0 ? (
+                        fomula.map((step, index) => (
+                            <li
+                                key={index}
+                                className="mt-2"
+                            >
+                                {step?.description ||
+                                    "Không rõ"}
+                            </li>
+                        ))
+                    ) : (
+                        <p>Chưa có công thức chế biến.</p>
+                    )}
                 </ol>
             </div>
         </div>
