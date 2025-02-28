@@ -42,16 +42,14 @@ export async function getRecipes() {
 }
 
 export async function getRecipeDetail(id: string) {
-    if (!id) return [];
-
-    const url = `/api/recipes?${id}`;
+    const url = `/api/recipes?id=${id}`;
 
     try {
         const res = await fetch(url);
+        console.log(res)
         if (!res.ok)
             throw new Error("Failed to fetch data");
         const recipes = await res.json();
-
         return recipes[0];
     } catch (error) {
         console.error("Error fetching ingredients:", error);
