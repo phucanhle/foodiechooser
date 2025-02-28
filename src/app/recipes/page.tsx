@@ -3,14 +3,7 @@ import ItemCard from "@/components/Card";
 import Title from "@/components/Title";
 import { useState, useEffect } from "react";
 import { getRecipes } from "@/lib/api";
-
-type Recipe = {
-    id: string;
-    image_src: string;
-    image_des: string;
-    food_name: string;
-    food_des: string;
-};
+import { Recipe } from "@/types/ingredients";
 
 export default function Recipes() {
     const [recipes, setRecipes] = useState([]);

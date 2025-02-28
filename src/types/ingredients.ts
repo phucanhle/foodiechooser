@@ -16,3 +16,29 @@ export interface Ingredient {
     nutritionFacts: NutritionFacts;
     group: string;
 }
+
+
+export interface FoodItem {
+    id: number;
+    ingredient_name: string;
+    ingredient_des: string;
+    image_src?: string;
+    image_des?: string;
+    nutrition_facts?: {
+        calories: number;
+        protein: number;
+        fat: number;
+        carbohydrates: number;
+    }[];
+    food_groups?: { name: string };
+    food_minerals?: { minerals: { name: string } }[];
+    food_vitamins?: { vitamins: { name: string } }[];
+};
+
+export interface Recipe {
+    id: string;
+    image_src: string;
+    image_des: string;
+    food_name: string;
+    food_des: string;
+};
